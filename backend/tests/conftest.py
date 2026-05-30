@@ -1,18 +1,18 @@
 """Pytest configuration and fixtures."""
 
 import asyncio
-from typing import AsyncGenerator, Generator
+from collections.abc import AsyncGenerator, Generator
 
 import pytest
 import pytest_asyncio
 from fastapi.testclient import TestClient
 from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
+from app.config import settings
+from app.dependencies import get_db
 from app.main import app
 from app.models.database import Base
-from app.dependencies import get_db
-from app.config import settings
 
 # Test database URL
 TEST_DATABASE_URL = settings.database_url.replace(

@@ -1,15 +1,15 @@
 """Database models."""
 
 from app.models.database import (
+    AuditLog,
     Base,
-    User,
-    Document,
     Chunk,
     Conversation,
-    Message,
+    Document,
     Evaluation,
     EvaluationResult,
-    AuditLog,
+    Message,
+    User,
 )
 
 __all__ = [

@@ -1,8 +1,9 @@
 """Evaluation repository."""
 
+from datetime import UTC
 from typing import Any
 
-from sqlalchemy import select, func
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.database import Evaluation, EvaluationResult, EvaluationStatus
@@ -73,8 +74,8 @@ class EvaluationRepository(BaseRepository[Evaluation]):
             update_data["metrics"] = metrics
 
         if status == EvaluationStatus.COMPLETED:
-            from datetime import datetime, timezone
-            update_data["completed_at"] = datetime.now(timezone.utc)
+            from datetime import datetime
+            update_data["completed_at"] = datetime.now(UTC)
 
         return await self.update(evaluation_id, **update_data)
 

@@ -1,11 +1,11 @@
 """Chat service - placeholder for Phase 1 implementation."""
 
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
 import structlog
 
 from app.models.database import Message
-from app.schemas.chat import ChatResponse, Citation, StreamChunk
+from app.schemas.chat import ChatResponse, StreamChunk
 
 logger = structlog.get_logger()
 
@@ -21,7 +21,7 @@ class ChatService:
         self,
         query: str,
         user_id: str,
-        history: list[Message] | None = None,
+        _history: list[Message] | None = None,
     ) -> ChatResponse:
         """
         Generate a response for the given query.
@@ -50,7 +50,7 @@ class ChatService:
         self,
         query: str,
         user_id: str,
-        history: list[Message] | None = None,
+        _history: list[Message] | None = None,
     ) -> AsyncGenerator[StreamChunk, None]:
         """
         Generate a streaming response.

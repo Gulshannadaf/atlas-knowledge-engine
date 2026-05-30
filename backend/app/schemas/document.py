@@ -1,7 +1,7 @@
 """Document schemas."""
 
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from app.schemas.common import BaseSchema
 
 
-class DocumentStatus(str, Enum):
+class DocumentStatus(StrEnum):
     """Document processing status."""
 
     PENDING = "pending"

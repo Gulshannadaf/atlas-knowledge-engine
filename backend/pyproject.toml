@@ -84,6 +84,8 @@ build-backend = "hatchling.build"
 [tool.ruff]
 target-version = "py312"
 line-length = 100
+
+[tool.ruff.lint]
 select = [
     "E",      # pycodestyle errors
     "W",      # pycodestyle warnings
@@ -99,9 +101,10 @@ ignore = [
     "E501",   # line too long (handled by formatter)
     "B008",   # function call in default argument (needed for FastAPI Depends)
     "B904",   # raise without from (sometimes intentional)
+    "UP046",  # Generic class uses Generic subclass (required for Python 3.11 compatibility)
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
 "tests/**" = ["ARG"]
 

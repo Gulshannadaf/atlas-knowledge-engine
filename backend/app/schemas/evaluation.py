@@ -1,7 +1,7 @@
 """Evaluation schemas."""
 
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 from app.schemas.common import BaseSchema
 
 
-class EvaluationStatus(str, Enum):
+class EvaluationStatus(StrEnum):
     """Evaluation run status."""
 
     PENDING = "pending"

@@ -1,6 +1,5 @@
 """Unit tests for authentication service."""
 
-import pytest
 from app.services.auth import AuthService
 
 

@@ -1,7 +1,7 @@
 """Chat endpoints."""
 
 import time
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
 import structlog
 from fastapi import APIRouter, HTTPException, status
@@ -59,7 +59,7 @@ async def chat(
     history = await msg_repo.get_by_conversation(conversation.id, limit=10)
 
     # Save user message
-    user_message = await msg_repo.create(
+    await msg_repo.create(
         conversation_id=conversation.id,
         role="user",
         content=request.message,

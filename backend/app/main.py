@@ -4,8 +4,8 @@ Atlas - AI Codebase Knowledge Assistant
 Main FastAPI application entry point.
 """
 
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
 
 import structlog
 from fastapi import FastAPI, Request
@@ -17,7 +17,7 @@ from app.api.middleware.logging import LoggingMiddleware
 from app.api.middleware.rate_limit import RateLimitMiddleware
 from app.api.routes import auth, chat, documents, evaluation, health
 from app.config import settings
-from app.db.session import init_db, close_db
+from app.db.session import close_db, init_db
 from app.observability.logging import setup_logging
 from app.services.vectordb import init_qdrant
 
@@ -27,7 +27,7 @@ logger = structlog.get_logger()
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+async def lifespan(_app: FastAPI) -> AsyncGenerator[None, None]:
     """Application lifespan handler for startup and shutdown events."""
     # Startup
     logger.info(

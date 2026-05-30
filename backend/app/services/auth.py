@@ -1,6 +1,6 @@
 """Authentication service."""
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -29,23 +29,23 @@ class AuthService:
 
     def create_access_token(self, user_id: str) -> str:
         """Create a JWT access token."""
-        expire = datetime.now(timezone.utc) + timedelta(minutes=self.access_token_expire_minutes)
+        expire = datetime.now(UTC) + timedelta(minutes=self.access_token_expire_minutes)
         payload = {
             "sub": user_id,
             "type": "access",
             "exp": expire,
-            "iat": datetime.now(timezone.utc),
+            "iat": datetime.now(UTC),
         }
         return jwt.encode(payload, self.secret_key, algorithm=self.algorithm)
 
     def create_refresh_token(self, user_id: str) -> str:
         """Create a JWT refresh token."""
-        expire = datetime.now(timezone.utc) + timedelta(days=self.refresh_token_expire_days)
+        expire = datetime.now(UTC) + timedelta(days=self.refresh_token_expire_days)
         payload = {
             "sub": user_id,
             "type": "refresh",
             "exp": expire,
-            "iat": datetime.now(timezone.utc),
+            "iat": datetime.now(UTC),
         }
         return jwt.encode(payload, self.secret_key, algorithm=self.algorithm)
 

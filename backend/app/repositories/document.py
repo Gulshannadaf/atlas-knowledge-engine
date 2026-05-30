@@ -1,6 +1,8 @@
 """Document repository."""
 
-from sqlalchemy import select, func
+from datetime import UTC
+
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.database import Document, DocumentStatus
@@ -70,7 +72,7 @@ class DocumentRepository(BaseRepository[Document]):
             update_data["chunk_count"] = chunk_count
 
         if status == DocumentStatus.COMPLETED:
-            from datetime import datetime, timezone
-            update_data["processed_at"] = datetime.now(timezone.utc)
+            from datetime import datetime
+            update_data["processed_at"] = datetime.now(UTC)
 
         return await self.update(document_id, **update_data)
