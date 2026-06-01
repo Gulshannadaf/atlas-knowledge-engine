@@ -1,0 +1,15 @@
+# Grafana Dashboards Provisioning Configuration
+
+apiVersion: 1
+
+providers:
+  - name: "Atlas Dashboards"
+    orgId: 1
+    folder: "Atlas"
+    folderUid: atlas
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/json
