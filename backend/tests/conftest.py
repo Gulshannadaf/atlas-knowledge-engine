@@ -16,8 +16,7 @@ from app.models.database import Base
 
 # Test database URL
 TEST_DATABASE_URL = settings.database_url.replace(
-    settings.database_url.split("/")[-1],
-    "atlas_test"
+    settings.database_url.split("/")[-1], "atlas_test"
 )
 if TEST_DATABASE_URL.startswith("postgresql://"):
     TEST_DATABASE_URL = TEST_DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
@@ -52,6 +51,7 @@ async def db_session() -> AsyncGenerator[AsyncSession, None]:
 @pytest_asyncio.fixture
 async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient, None]:
     """Create test client with overridden database dependency."""
+
     async def override_get_db():
         yield db_session
 

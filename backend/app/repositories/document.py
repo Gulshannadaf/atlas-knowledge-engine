@@ -73,6 +73,7 @@ class DocumentRepository(BaseRepository[Document]):
 
         if status == DocumentStatus.COMPLETED:
             from datetime import datetime
+
             update_data["processed_at"] = datetime.now(UTC)
 
         return await self.update(document_id, **update_data)

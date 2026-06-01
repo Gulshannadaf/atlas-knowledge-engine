@@ -67,6 +67,7 @@ async def chat(
 
     # Handle streaming response
     if request.stream:
+
         async def generate() -> AsyncGenerator[str, None]:
             async for chunk in chat_service.generate_response_stream(
                 query=request.message,

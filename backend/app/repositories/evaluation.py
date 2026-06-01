@@ -39,10 +39,7 @@ class EvaluationRepository(BaseRepository[Evaluation]):
     ) -> tuple[list[Evaluation], int]:
         """List all evaluations."""
         query = (
-            select(Evaluation)
-            .order_by(Evaluation.created_at.desc())
-            .offset(offset)
-            .limit(limit)
+            select(Evaluation).order_by(Evaluation.created_at.desc()).offset(offset).limit(limit)
         )
         count_query = select(func.count()).select_from(Evaluation)
 
@@ -75,6 +72,7 @@ class EvaluationRepository(BaseRepository[Evaluation]):
 
         if status == EvaluationStatus.COMPLETED:
             from datetime import datetime
+
             update_data["completed_at"] = datetime.now(UTC)
 
         return await self.update(evaluation_id, **update_data)
